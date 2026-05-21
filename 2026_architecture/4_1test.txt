@@ -1,0 +1,33 @@
+`timescale 1ns / 1ps  // 時間の単位を1ナノ秒に設定
+
+module test_counter10;
+    // 1. 相手の入力を reg、出力を wire で用意する
+    reg CLK;
+    reg RST;
+    wire [3:0] Q;
+
+    // 2. テスト対象の回路（10進カウンタ）を呼び出す
+    counter10 uut (
+        .CLK(CLK),
+        .RST(RST),
+        .Q(Q)
+    );
+
+    // 3. クロックを作る (10単位時間ごとに 0と1を反転させる)
+    initial CLK = 0;
+    always #10 CLK = ~CLK;
+
+    // 4. 信号の変化を記述する
+    initial begin
+        // 最初はリセットをかけておく
+        RST = 1;
+        #20;          // 20ナノ秒待つ
+        
+        // リセットを解除
+        RST = 0;
+        
+        #300;         // しばらく放置してカウントアップを見る
+        
+        $finish;      // シミュレーション終了
+    end
+endmodule

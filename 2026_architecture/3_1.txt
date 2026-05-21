@@ -1,0 +1,58 @@
+c
+`timescale 1ns / 1ps
+
+module seven_segment_tb;
+
+    // 1. 入力用のレジスタと出力用のワイヤを準備
+    reg i3, i2, i1, i0;
+    wire a, b, c, d, e, f, g;
+
+    // 2. テスト対象モジュール (DUT) のインスタンス化
+    seven_segment dut (
+        .I3(i3), .I2(i2), .I1(i1), .I0(i0),
+        .A(a), .B(b), .C(c), .D(d), .E(e), .F(f), .G(g)
+    );
+
+    // 3. テストパターンの生成
+    initial begin
+        {i3, i2, i1, i0} = 4'b0000; #10;
+        {i3, i2, i1, i0} = 4'b0001; #10;
+        {i3, i2, i1, i0} = 4'b0010; #10;
+        {i3, i2, i1, i0} = 4'b0011; #10;
+        
+        # 8と9
+        {i3, i2, i1, i0} = 4'b1000; #10;
+        {i3, i2, i1, i0} = 4'b1001; #10;
+        $finish;
+    end
+
+endmodule
+
+module seven_segment(
+input I0, I1, I2, I3,
+output A, B, C, D, E, F, G
+);
+// 内部信号 S を reg型で宣言
+reg [6:0] S;
+
+always @(*) begin
+    case ({I3, I2, I1, I0})
+        // 形式: {g, f, e, d, c, b, a} 
+        4'b0000: S = 7'b0111111; // 0
+        4'b0001: S = 7'b0000110; // 1
+        4'b0010: S = 7'b1011011; // 2
+        4'b0011: S = 7'b1001111; // 3
+        4'b0100: S = 7'b1100110; // 4
+        4'b0101: S = 7'b1101101; // 5
+        4'b0110: S = 7'b1111101; // 6
+        4'b0111: S = 7'b0000111; // 7
+        4'b1000: S = 7'b1111111; // 8
+        4'b1001: S = 7'b1101111; // 9
+        default: S = 7'b0000000; // それ以外（A〜Fを表示させない場合）
+    endcase
+end
+
+// S[0]をA、S[6]をGに対応させる場合
+assign {G, F, E, D, C, B, A} = S;
+endmodule
+

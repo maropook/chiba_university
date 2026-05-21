@@ -1,0 +1,36 @@
+
+
+STATEは
+00 01 02 03 04 08 0c 0d 0e 20 21 22 23　01 02 03 04 08 0c 0d 0e 10 11　01 02 03 04 08 ffというふうに変化していた。
+CNTU.vを見て対応付けてみると具体的には以下のようにSTATEが変化していた
+00 READY
+01 FETCH_1ST
+02 FETCH_2ND
+03 FETCH_3RD
+04 FETCH_4TH
+08 DECODING
+0c LOAD_OPERAND_1ST
+0d LOAD_OPERAND_2ND
+0e LOAD_OPERAND_3RD
+20 CALC_MEM_1ST
+21 CALC_MEM_2ND
+22 CALC_MEM_3RD
+23 CALC_MEM_4TH
+10 STORE_1ST
+11 STORE_2ND
+88 RET_1ST
+89 RET_2ND
+8a RET_3RD
+8b RET_4TH
+ff HALT
+
+CPIは単位時間あたりの命令開始から終わるまでの総クロック数である
+命令開始から終わるまでの総クロック数 = 27
+命令数はLD ST RETと3つあるため
+総クロック数÷命令数= 27÷3 = 9.0
+ためCPIは9.0とわかる
+
+MIPSは1秒間に何百万個の命令を実行できるかである
+クロック周波数 = 125MHz
+MIPS=クロック周波数÷CPI= 13.88888889
+となるためMIPSは約13.9とわかる

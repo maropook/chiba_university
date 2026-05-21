@@ -1,0 +1,23 @@
+`timescale 1 ps / 1 ps
+
+module design_1_wrapper
+   (BUSY,
+    CLK,
+    DONE,
+    START);
+  output BUSY;
+  input CLK;
+  output DONE;
+  input [0:0]START;
+
+  wire BUSY;
+  wire CLK;
+  wire DONE;
+  wire [0:0]START;
+
+  design_1 design_1_i
+       (.BUSY(BUSY),
+        .CLK(CLK),
+        .DONE(DONE),
+        .START(START));
+endmodule

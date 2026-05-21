@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import json; json.load\\(open\\(''/Users/hasegawaitsuki_1/ghq/github.com/maropook/chiba_university/2026_information_system/task3.ipynb''\\)\\); print\\(''Valid JSON''\\)\")"
+    ]
+  }
+}
