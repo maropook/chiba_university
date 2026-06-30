@@ -96,20 +96,21 @@ def tangent_linear_matrix(x, dt):
     N = len(x)
     M = np.zeros((N, N))
     for j in range(N):
-        j_minus2 = (j - 2) % N
-        j_minus1 = (j - 1) % N
-        j_plus1  = (j + 1) % N
-        M[j, j_minus2] = -x[j_minus1] * dt
-        M[j, j_minus1] = (x[j_plus1] - x[j_minus2]) * dt
+        prev2 = (j - 2) % N
+        prev1 = (j - 1) % N
+        next1  = (j + 1) % N
+        M[j, prev2] = -x[prev1] * dt
+        M[j, prev1] = (x[next1] - x[prev2]) * dt
         M[j, j]        = 1.0 - dt
-        M[j, j_plus1]  = x[j_minus1] * dt
+        M[j, next1]  = x[prev1] * dt
     return M
-
 
 # ==============================================================
 # EKF cycle
 # ==============================================================
 def EKF_cycle(xa, Pa, y_obs, dt, F, H, R, inflation):
+
+
     # 1. tangent linear matrix (M)
     M = tangent_linear_matrix(xa, dt)
 
@@ -134,6 +135,7 @@ def EKF_cycle(xa, Pa, y_obs, dt, F, H, R, inflation):
     Pa_new = (I - K @ H) @ Pb
 
     return xa_new, Pa_new, xb, Pb, K
+
 
 
 # ==============================================================
