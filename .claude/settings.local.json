@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3 -c \"import json; json.load\\(open\\(''/Users/hasegawaitsuki_1/ghq/github.com/maropook/chiba_university/2026_information_system/task3.ipynb''\\)\\); print\\(''Valid JSON''\\)\")"
+      "Bash(python3 -c \"import json; json.load\\(open\\(''/Users/hasegawaitsuki_1/ghq/github.com/maropook/chiba_university/2026_information_system/task3.ipynb''\\)\\); print\\(''Valid JSON''\\)\")",
+      "Read(//usr/local/lib/**)",
+      "Read(//usr/local/opt/**)",
+      "Read(//opt/homebrew/Cellar/gettext/1.0/lib/**)",
+      "Read(//usr/local/Cellar/**)"
     ]
   }
 }
