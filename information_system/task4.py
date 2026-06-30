@@ -1,3 +1,4 @@
+"""
 def step_function(x):
     return np.array(x > 0, dtype=int)
 
@@ -40,3 +41,4 @@ print(f"OR2(0,0): {OR2(x_00)}")
 print(f"OR2(0,1): {OR2(x_01)}")
 print(f"OR2(1,0): {OR2(x_10)}")
 print(f"OR2(1,1): {OR2(x_11)}")
+"""
