@@ -22,7 +22,7 @@ y = train["y"]
 
 models = {
     "LogisticRegression      ": LogisticRegression(random_state=42),
-    "LogisticRegression (L1) ": LogisticRegression(penalty="l1", solver="liblinear", random_state=42),
+    "LogisticRegression (L1) ": LogisticRegression(l1_ratio=1, solver="saga", random_state=42),
     "LinearDiscriminantAnalysis": LinearDiscriminantAnalysis(),
     "GaussianNB              ": GaussianNB(),
     "SVC                     ": SVC(kernel="rbf", random_state=42),
