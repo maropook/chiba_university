@@ -275,14 +275,21 @@ def task3():
         print(f"{name:<8} {bi:>8} {si:>10.4f} {label:>14}")
 
     print("\n--- 影の価格 y* ---")
-    print(f"{'資源':<8} {'影の価格':>10} {'意味（利益/単位）':}")
-    print("-" * 44)
+    print(f"{'資源':<8} {'影の価格':>10}")
+    print("-" * 20)
     for name, yi in zip(resources, res['y']):
         print(f"{name:<8} {yi:>10.4f}")
 
     max_y_idx = int(np.argmax(res['y']))
     print(f"\n最も価値の高い資源: {resources[max_y_idx]} "
           f"(影の価格 = {res['y'][max_y_idx]:.4f})")
+
+    print("\n強双対性の確認 b^T y* = c^T x*:")
+    lhs = float(np.dot(b, res['y']))
+    rhs = float(np.dot(c, res['x']))
+    print(f"  b^T y* = {lhs:.6f}")
+    print(f"  c^T x* = {rhs:.6f}")
+    print(f"  一致: {np.isclose(lhs, rhs, atol=1e-4)}")
 
     return res
 
@@ -292,5 +299,5 @@ def task3():
 # =============================================================================
 if __name__ == "__main__":
     task1()
-    res2 = task2()
-    res3 = task3()
+    task2()
+    task3()
